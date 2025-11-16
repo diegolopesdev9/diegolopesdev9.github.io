@@ -10,40 +10,42 @@ function Home2() {
         <Row>
           <Col md={8} className="home-about-description">
             <h1 style={{ fontSize: "2.6em" }}>
-              LET ME <span className="purple"> INTRODUCE </span> MYSELF
+             DEIXE EU ME <span className="purple"> APRESENTAR </span>
             </h1>
             <p className="home-about-body">
-              I’m a Software Engineer who loves transforming ideas into
-              reliable, scalable products. Over time, I’ve explored several
-              technologies and found my passion in building high-performance
-              systems and intuitive user experiences.
+              Sou um Desenvolvedor Full-Stack apaixonado por transformar ideias em
+              produtos profissionais e escaláveis. Ao longo do tempo, explorei diversas
+              tecnologias e encontrei minha paixão em construir dashboards de alto 
+              desempenho e experiências intuitivas.
               <br />
               <br />
-              I’m proficient in
+              Sou proficiente em
               <i>
                 <b className="purple">
                   {" "}
-                  JavaScript, C++, Rust, Node.js, and Java{" "}
-                </b>
+                 Python, JavaScript, TypeScript, React e FastAPI{" "}
+                 </b>
               </i>
-              — and I enjoy working across both backend and frontend stacks.
+              — e eu gosto de trabalhar tanto com o backend quanto com o frontend.
               <br />
               <br />
-              My key areas of interest include developing
+              Minhas principais áreas de interesse incluem desenvolvimento de
               <i>
-                <b className="purple">
-                  {" "}
-                  Web Applications, Blockchain Solutions,{" "}
-                </b>
+               <b className="purple">
+                 {" "}
+                 Dashboards de Business Intelligence, Automação com IA{" "}
+               </b>
               </i>
-              and exploring new ways to bridge on-chain and off-chain systems.
+               e explorar novas formas de integrar Inteligência Artificial Generativa
+               em aplicações web.
               <br />
               <br />
-              Whenever possible, I love building projects with
-              <b className="purple"> Node.js </b> and modern frameworks like{" "}
+              Sempre que possível, construo projetos com
+              <b className="purple"> Python (Streamlit, FastAPI) </b> e frameworks 
+              modernos como{" "}
               <i>
-                <b className="purple">React.js</b> and{" "}
-                <b className="purple">Next.js</b>.
+                <b className="purple">React.js</b> e{" "}
+                <b className="purple">TypeScript</b>.
               </i>
             </p>
           </Col>
