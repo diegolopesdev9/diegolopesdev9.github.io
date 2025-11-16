@@ -15,20 +15,32 @@ function Projects() {
       <Particle />
       <Container>
         <h1 className="project-heading">
-          My Recent <strong className="purple">Works </strong>
+          Meus recentes <strong className="purple">Projetos </strong>
         </h1>
         <p style={{ color: "white" }}>
-          Here are a few projects I've worked on recently.
+          Aqui estão alguns projetos em que trabalhei recentemente.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
           <Col md={4} className="project-card">
             <ProjectCard
               imgPath={chatify}
               isBlog={false}
-              title="Chatify"
-              description="Personal Chat Room or Workspace to share resources and hangout with friends build with react.js, Material-UI, and Firebase. Have features which allows user for realtime messaging, image sharing as well as supports reactions on messages."
-              ghLink="https://github.com/soumyajit4419/Chatify"
-              demoLink="https://chatify-49.web.app/"
+              title="LeadInsights - Dashboard de Análise de Leads "
+              description="Dashboard profissional de Business Intelligence para análise de leads de marketing, desenvolvido com Streamlit e Python.
+              Funcionalidades:
+- 7 gráficos interativos (funil de conversão, análise temporal, distribuição de qualidade)
+- Integração robusta com Google Sheets API
+- Sistema de cache otimizado (redução de 80% no tempo de resposta)
+- Exportação para Excel e PDF
+- Auto-refresh a cada 5 minutos
+- Filtros avançados e KPIs em tempo real
+Tecnologias:
+Python • Streamlit • Plotly • Google Sheets API • Pandas • Render.com
+Complexidade:
+~3000 linhas de código organizadas em 15+ módulos
+Qualidade equivalente a produtos enterprise ($50K-$100K)
+Status: Em produção com monitoramento 24/7."
+              
             />
           </Col>
 
@@ -36,10 +48,24 @@ function Projects() {
             <ProjectCard
               imgPath={bitsOfCode}
               isBlog={false}
-              title="Bits-0f-C0de"
-              description="My personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js. Supports dark mode and easy to write blogs using markdown."
-              ghLink="https://github.com/soumyajit4419/Bits-0f-C0de"
-              demoLink="https://blogs.soumya-jit.tech/"
+              title="PagueFlow - Sistema de Gestão Financeira"
+              description="Aplicação full-stack para controle financeiro pessoal e empresarial com arquitetura moderna e escalável.
+Funcionalidades:
+- Gestão de contas a pagar/receber
+- Categorização inteligente de despesas
+- Relatórios financeiros e análises
+- Sistema de autenticação seguro
+- Row-Level Security (RLS) para isolamento de dados
+Stack Tecnológica:
+Frontend: React • TypeScript • TailwindCSS
+Backend: Supabase • Prisma ORM • PostgreSQL
+Arquitetura: SPA com API REST
+Segurança:
+Autenticação via Supabase Auth
+Políticas RLS no banco de dados
+Validação de dados em múltiplas camadas
+Status: Desenvolvimento ativo"
+              
             />
           </Col>
 
@@ -47,46 +73,30 @@ function Projects() {
             <ProjectCard
               imgPath={editor}
               isBlog={false}
-              title="Editor.io"
-              description="Online code and markdown editor build with react.js. Online Editor which supports html, css, and js code with instant view of website. Online markdown editor for building README file which supports GFM, Custom Html tags with toolbar and instant preview.Both the editor supports auto save of work using Local Storage"
-              ghLink="https://github.com/soumyajit4419/Editor.io"
-              demoLink="https://editor.soumya-jit.tech/"              
+              title="WhatsApp Assistant"
+              description="Assistente virtual inteligente para WhatsApp com capacidades de IA conversacional e automação de tarefas.
+Funcionalidades:
+- Processamento de linguagem natural com Gemini AI
+- Gerenciamento de agenda via Google Calendar
+- Respostas contextuais e comandos personalizados
+- Automação de workflows com n8n
+- Arquitetura preparada para múltiplas integrações
+Stack Tecnológica:
+Backend: Python • FastAPI
+IA: Google Gemini AI
+Integrações: Evolution API • Google Calendar API
+DevOps: Docker • Docker Compose
+Diferenciais:
+- Arquitetura containerizada para portabilidade total
+- Ambiente-agnostic (Replit, Docker, VPS, Railway)
+- Configuração flexível via variáveis de ambiente
+- Documentação completa de deploy
+Status: MVP funcional, expansão em andamento"
+           
             />
           </Col>
 
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={leaf}
-              isBlog={false}
-              title="Plant AI"
-              description="Used the plant disease dataset from Kaggle and trained a image classifer model using 'PyTorch' framework using CNN and Transfer Learning with 38 classes of various plant leaves. The model was successfully able to detect diseased and healthy leaves of 14 unique plants. I was able to achieve an accuracy of 98% by using Resnet34 pretrained model."
-              ghLink="https://github.com/soumyajit4419/Plant_AI"
-              demoLink="https://plant49-ai.herokuapp.com/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={suicide}
-              isBlog={false}
-              title="Ai For Social Good"
-              description="Using 'Natural Launguage Processing' for the detection of suicide-related posts and user's suicide ideation in cyberspace  and thus helping in sucide prevention."
-              ghLink="https://github.com/soumyajit4419/AI_For_Social_Good"
-              // demoLink="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" <--------Please include a demo link here
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={emotion}
-              isBlog={false}
-              title="Face Recognition and Emotion Detection"
-              description="Trained a CNN classifier using 'FER-2013 dataset' with Keras and tensorflow backened. The classifier sucessfully predicted the various types of emotions of human. And the highest accuracy obtained with the model was 60.1%.
-              Then used Open-CV to detect the face in an image and then pass the face to the classifer to predict the emotion of a person."
-              ghLink="https://github.com/soumyajit4419/Face_And_Emotion_Detection"
-              // demoLink="https://blogs.soumya-jit.tech/"      <--------Please include a demo link here 
-            />
-          </Col>
+      
         </Row>
       </Container>
     </Container>

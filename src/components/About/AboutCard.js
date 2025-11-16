@@ -8,15 +8,15 @@ function AboutCard() {
       <Card.Body>
         <blockquote className="blockquote mb-0">
           <p style={{ textAlign: "justify" }}>
-            Olá! Eu sou <span className="purple">Diego Lopes</span>, 
-            de <span className="purple">Sorocaba, São Paulo</span>.
+            Olá! Eu sou <span className="purple">Diego Lopes </span> 
+             de <span className="purple">Sorocaba, São Paulo</span>.
             <br />
             Atualmente trabalho como{" "}
             <span className="purple">Desenvolvedor Full-Stack Freelancer</span>,
             criando soluções web profissionais com IA Generativa.
             <br />
             Tenho formação em{" "}
-            <span className="purple">Análise de Sistemas</span> e{" "}
+            <span className="purple">Análise e Desenvolvimento de Sistemas</span> e{" "}
             <span className="purple">Engenharia Elétrica</span>.
             <br />
             <br />
