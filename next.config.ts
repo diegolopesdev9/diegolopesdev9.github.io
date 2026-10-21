@@ -1,9 +1,10 @@
 import type { NextConfig } from "next";
 
+// Site estático publicado no GitHub Pages (diegolopesdev9.github.io)
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  output: "export",
+  trailingSlash: true,
+  images: { unoptimized: true },
   turbopack: {
     rules: {
       "*.css": {
