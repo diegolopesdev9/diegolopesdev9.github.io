@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 const titulo = "Diego Lopes · Desenvolvedor Front-End & Full Stack";
 const descricao =
-  "Desenvolvedor Front-End & Full Stack em Sorocaba, SP. React, Next.js, TypeScript, UI/UX e agentes de IA. Sites, e-commerces e SaaS. Disponível para CLT, PJ e freelance.";
+  "Desenvolvedor Front-End & Full Stack em Itapetininga, SP. React, Next.js, TypeScript, UI/UX e agentes de IA. Sites, e-commerces e SaaS. Disponível para CLT, PJ e freelance.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -40,7 +40,7 @@ const jsonLd = {
   jobTitle: "Desenvolvedor Front-End & Full Stack",
   url: SITE_URL,
   email: `mailto:${contato.email}`,
-  address: { "@type": "PostalAddress", addressLocality: "Sorocaba", addressRegion: "SP", addressCountry: "BR" },
+  address: { "@type": "PostalAddress", addressLocality: "Itapetininga", addressRegion: "SP", addressCountry: "BR" },
   sameAs: [contato.linkedin, contato.github],
   knowsAbout: ["React", "Next.js", "TypeScript", "UI/UX Design", "SEO técnico", "Agentes de IA", "E-commerce"],
 };

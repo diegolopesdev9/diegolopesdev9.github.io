@@ -280,7 +280,7 @@ export default function Home() {
 
       <footer className="border-t border-line">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm text-muted sm:flex-row sm:justify-between sm:px-6">
-          <p>© {new Date().getFullYear()} Diego Lopes · Sorocaba, SP</p>
+          <p>© {new Date().getFullYear()} Diego Lopes · Itapetininga, SP</p>
           <p className="flex gap-4">
             <a href={contato.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-white">LinkedIn</a>
             <a href={contato.github} target="_blank" rel="noopener noreferrer" className="hover:text-white">GitHub</a>
