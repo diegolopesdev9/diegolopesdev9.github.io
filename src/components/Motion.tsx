@@ -168,22 +168,7 @@ export default function Motion() {
           onUpdate: (s) => steps.forEach((st, k) => st.classList.toggle("on", s.progress >= k / 4 + 0.02)),
         });
 
-        // fechamento: o símbolo {dl} abre e as chaves emolduram o convite
-        const bl = q(".close-stage .bl")!;
-        const br = q(".close-stage .br")!;
-        const dl = q(".close-stage .dl-mid")!;
-        const edge = (el: Element, dir: -1 | 1) => {
-          const r = el.getBoundingClientRect();
-          const target = dir < 0 ? 48 + r.width * 0.9 : window.innerWidth - 48 - r.width * 0.9;
-          return target - (r.left + r.width / 2);
-        };
-        const ct = gsap.timeline({ defaults: { ease: "power2.inOut" } });
-        ct.fromTo(dl, { autoAlpha: 1, scale: 1 }, { autoAlpha: 0, scale: 0.6, duration: 0.3 }, 0.05)
-          .fromTo(bl, { x: 0, scale: 1 }, { x: () => edge(bl, -1), scale: 1.7, duration: 0.6 }, 0.15)
-          .fromTo(br, { x: 0, scale: 1 }, { x: () => edge(br, 1), scale: 1.7, duration: 0.6 }, 0.15)
-          .fromTo(".close-in", { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: "power2.out" }, 0.6)
-          .to({}, { duration: 0.2 });
-        ScrollTrigger.create({ trigger: ".close", start: "top top", end: "+=130%", pin: true, scrub: 0.6, animation: ct, invalidateOnRefresh: true });
+        closeBraces(1.7, 48);
 
         return () => {
           enter.forEach(([r, h]) => r.removeEventListener("mouseenter", h));
@@ -192,12 +177,71 @@ export default function Motion() {
         };
       });
       mm.add("(max-width: 999px)", () => {
-        ScrollTrigger.create({ trigger: ".a-phone", start: "top 75%", end: "bottom 40%", scrub: 0.6, animation: agentTimeline() });
-        gsap.to(".proc-line i", { scaleY: 1, ease: "none", scrollTrigger: { trigger: ".proc-track", start: "top 65%", end: "bottom 65%", scrub: 0.4 } });
-        qa(".step").forEach((st) =>
-          ScrollTrigger.create({ trigger: st, start: "top 65%", end: "max", onToggle: (s) => st.classList.toggle("on", s.isActive) }),
-        );
+        // projetos: o aparelho fica preso na tela e a página do cliente rola dentro dele
+        rows.forEach((r) => {
+          const stage = q(".m-stage", r);
+          const shot = q<HTMLImageElement>(".m-shot", r);
+          const screen = q(".device-screen", r);
+          const device = q(".device", r);
+          if (!stage || !shot || !screen || !device) return;
+          gsap.fromTo(device, { scale: 0.86, rotate: -2, opacity: 0.5 }, {
+            scale: 1, rotate: 0, opacity: 1, ease: "none",
+            scrollTrigger: { trigger: stage, start: "top bottom", end: "top 30%", scrub: 0.5 },
+          });
+          gsap.fromTo(shot, { y: 0 }, {
+            y: () => -(shot.offsetHeight - screen.clientHeight), ease: "none",
+            scrollTrigger: { trigger: stage, start: "top 70px", endTrigger: r, end: "bottom bottom", scrub: 0.8, invalidateOnRefresh: true },
+          });
+        });
+
+        // agente: o aparelho trava e a conversa acontece
+        ScrollTrigger.create({ trigger: ".agent-stage", start: "center center", end: "+=160%", pin: true, scrub: 0.6, animation: agentTimeline() });
+
+        // processo: os passos passam de lado com a seção travada
+        const proc = q(".proc")!;
+        proc.classList.add("pinned-m");
+        const track = q(".proc-track")!;
+        const steps = qa(".step");
+        const dist = () => track.scrollWidth - steps[0].offsetWidth;
+        const tl = gsap.timeline({ defaults: { ease: "none" } })
+          .to(track, { x: () => -dist(), duration: 1 })
+          .to(".proc-bar i", { scaleX: 1, duration: 1 }, 0);
+        ScrollTrigger.create({
+          trigger: proc, start: "top top", end: () => "+=" + dist() * 1.3, pin: true, scrub: 0.5, animation: tl, invalidateOnRefresh: true,
+          // ao soltar o dedo, encaixa sempre num passo inteiro
+          snap: { snapTo: 1 / (steps.length - 1), duration: { min: 0.2, max: 0.5 }, delay: 0.08, ease: "power1.inOut" },
+          onUpdate: (s) => steps.forEach((st, k) => st.classList.toggle("on", s.progress >= k / (steps.length - 1) - 0.08)),
+        });
+        steps[0].classList.add("on");
+
+        closeBraces(1.35, 10);
+
+        return () => {
+          proc.classList.remove("pinned-m");
+          gsap.set(track, { x: 0 });
+        };
       });
+
+      // fechamento: o símbolo {dl} abre e as chaves emolduram o convite
+      function closeBraces(scaleTo: number, margin: number) {
+        const bl = q(".close-stage .bl")!;
+        const br = q(".close-stage .br")!;
+        const dl = q(".close-stage .dl-mid")!;
+        const edge = (el: Element, dir: -1 | 1) => {
+          gsap.set(el, { x: 0, scale: 1 });
+          const r = el.getBoundingClientRect();
+          const half = (r.width * scaleTo) / 2;
+          const target = dir < 0 ? margin + half : window.innerWidth - margin - half;
+          return target - (r.left + r.width / 2);
+        };
+        const ct = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+        ct.fromTo(dl, { autoAlpha: 1, scale: 1 }, { autoAlpha: 0, scale: 0.6, duration: 0.3 }, 0.05)
+          .fromTo(bl, { x: 0, scale: 1 }, { x: () => edge(bl, -1), scale: scaleTo, duration: 0.6 }, 0.15)
+          .fromTo(br, { x: 0, scale: 1 }, { x: () => edge(br, 1), scale: scaleTo, duration: 0.6 }, 0.15)
+          .fromTo(".close-in", { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: "power2.out" }, 0.6)
+          .to({}, { duration: 0.2 });
+        ScrollTrigger.create({ trigger: ".close", start: "top top", end: "+=130%", pin: true, scrub: 0.6, animation: ct, invalidateOnRefresh: true });
+      }
 
       function agentTimeline() {
         const msgs = qa(".a-body .a-msg");
@@ -241,6 +285,16 @@ export default function Motion() {
       // ---------- marca {dl}: nome recolhe e indicador de rolagem ----------
       gsap.to(".brand .wm", { autoAlpha: 0, x: -30, ease: "none", scrollTrigger: { start: 40, end: 260, scrub: true } });
       gsap.fromTo(".prog", { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, ease: "none", scrollTrigger: { start: 160, end: 360, scrub: true } });
+      gsap.to(".prog-m i", { scaleX: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: true } });
+      // WhatsApp fixo no celular: aparece depois da abertura e sai quando o convite final entra
+      const wa = q(".wa-float");
+      if (wa) {
+        ScrollTrigger.create({
+          start: () => window.innerHeight * 1.2,
+          endTrigger: ".close", end: "top 60%",
+          onToggle: (s) => gsap.to(wa, { autoAlpha: s.isActive ? 1 : 0, y: s.isActive ? 0 : 16, duration: 0.35, ease: "power2.out", overwrite: true }),
+        });
+      }
       const progN = q(".prog-n")!;
       gsap.to(".prog-bar i", {
         scaleX: 1, ease: "none",

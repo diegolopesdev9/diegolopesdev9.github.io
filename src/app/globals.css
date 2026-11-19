@@ -252,3 +252,63 @@ html:not(.js-motion) .close-stage { display: none; }
 @media (min-width: 1000px) { .close-in { padding-inline: min(17vw, 260px); } }
 
 @media (prefers-reduced-motion: reduce) { .scroll-cue i::after { animation: none; } }
+
+/* ---------- CELULAR: movimento pensado para o toque ---------- */
+.m-stage, .m-space, .prog-m, .wa-float, .proc-bar { display: none; }
+@media (max-width: 999px) {
+  .row { padding-block: 44px 8px; }
+  .m-stage { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 28px; }
+  .m-head { width: 100%; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .m-n { font-family: var(--f-mono); font-size: 12px; color: var(--accent); letter-spacing: .06em; }
+  .m-name { font-family: var(--f-display); font-weight: 900; text-transform: uppercase; font-size: 18px; letter-spacing: -.01em; }
+  .device { position: relative; background: #050504; border: 1px solid var(--line); box-shadow: 0 30px 70px -30px rgba(255, 74, 28, .35); max-width: 100%; }
+  .device.phone { height: min(calc(100svh - var(--hdr) - 100px), 620px); aspect-ratio: .49; border-radius: 34px; padding: 9px; display: flex; }
+  .device.phone .device-screen { flex: 1; border-radius: 26px; }
+  .device-notch { position: absolute; z-index: 2; top: 15px; left: 50%; margin-left: -32px; width: 64px; height: 18px; border-radius: 10px; background: #050504; }
+  .device.browser { width: 100%; border-radius: 12px; overflow: hidden; }
+  .device-bar { display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-bottom: 1px solid var(--line); background: var(--bg-2); }
+  .device-bar i { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--dim); }
+  .device-bar span { margin-left: 6px; font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+  .device.browser .device-screen { aspect-ratio: 4 / 3.8; }
+  .device-screen { position: relative; overflow: hidden; background: #fff; }
+  .m-shot { width: 100%; height: auto; display: block; will-change: transform; }
+
+  /* com movimento: o aparelho fica preso na tela enquanto a página do cliente rola dentro dele */
+  .js-motion .m-stage { position: sticky; top: calc(var(--hdr) + 6px); height: calc(100svh - var(--hdr) - 12px); justify-content: center; margin-top: 8px; }
+  .js-motion .m-space { display: block; height: 140svh; }
+
+  /* agente: aparelho menor para caber travado na tela, cartão do painel por cima no fim */
+  .a-screen { height: min(520px, 62svh); }
+  .a-crm { position: absolute; left: 50%; margin-left: -105px; width: 210px; bottom: 70px; z-index: 3; box-shadow: 0 20px 50px -10px rgba(0, 0, 0, .7); }
+  .agent-row { padding-bottom: 8px; }
+
+  /* processo: os passos passam de lado com a seção travada */
+  .proc.pinned-m { height: 100svh; display: flex; align-items: center; padding-block: calc(var(--hdr) + 8px) 16px; overflow: hidden; }
+  .proc.pinned-m > .wrap { width: 100%; }
+  .proc.pinned-m .proc-bar { display: block; height: 3px; margin-top: 28px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .proc-bar i { display: block; height: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+  .proc.pinned-m .proc-track { display: flex; flex-wrap: nowrap; gap: 24px; padding-left: 0; margin-top: 28px; width: max-content; }
+  .proc.pinned-m .proc-line, .proc.pinned-m .step::before { display: none; }
+  .proc.pinned-m .step { width: calc(100vw - 32px); }
+  .proc.pinned-m .step .num { font-size: clamp(96px, 18svh, 150px); }
+  .proc.pinned-m .step.on .num { color: var(--accent); }
+  .proc.pinned-m .step h3 { font-size: 30px; }
+  .proc.pinned-m .step p { font-size: 18px; max-width: 26ch; }
+
+  /* fechamento: as mesmas chaves {dl}, menores */
+  .js-motion .close-stage { display: flex; }
+  .js-motion .close-stage svg { height: min(16svh, 26vw); }
+  .js-motion .close-stage .dl-mid { height: min(13svh, 21vw); }
+  .close-in { padding-inline: 13vw; }
+  .close h2 { font-size: clamp(26px, 9cqi, 46px); }
+  .close-row { flex-direction: column; gap: 16px; }
+  .close .contact { text-align: center; }
+
+  /* barra de progresso fina no topo e WhatsApp sempre a um toque */
+  .js-motion .prog-m { display: block; position: fixed; z-index: 70; left: 0; right: 0; top: env(safe-area-inset-top, 0px); height: 2px; }
+  .prog-m i { display: block; height: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+  .js-motion .wa-float { display: inline-flex; align-items: center; gap: 8px; position: fixed; z-index: 56; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); padding: 13px 18px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: 0 14px 34px -10px rgba(255, 74, 28, .7); visibility: hidden; opacity: 0; }
+  .wa-float .wb { display: inline-block; font-family: var(--f-mono); color: var(--ink); font-weight: 500; transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
+  .wa-float:active .wb:first-child { transform: translateX(-4px); }
+  .wa-float:active .wb:last-child { transform: translateX(4px); }
+}
